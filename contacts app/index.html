@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container navbar-nav justify-content-between">
+                <a href="#" class="nav-item nav-link">HOME</a>
+                <button  id="add-btn" type="button" class="btn btn-success px-4 mx-4" data-bs-toggle="modal" data-bs-target="#add-modal">ADD</button>
+            </div>
+        </nav>
+    </header>
+    <main class="pt-4">
+
+
+        <div class="table-responsive container">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Edit/Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Delete modal....................................................................................... -->
+
+        <div class="modal" id="delete-modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+    
+                <div class="modal-header">
+                  <h4 class="modal-title">Are You Sure?</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+          
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                  <button id="delete-confirmation" onclick="deleteConfirmClickHandler()" type="button" class="btn btn-success" data-bs-dismiss="modal">Yes</button>
+                </div>
+          
+              </div>
+            </div>
+          </div>
+
+        <!-- ADD modal....................................................................................... -->
+
+          <div class="modal" id="add-modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                
+                <div class="modal-header">
+                  <h4 class="modal-title">Fill The Fields</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="moadl-body p-4">
+                  <div class="mb-3 mt-3">
+                    <label for="add-contact-first-name-field" class="form-label">First Name:</label>
+                    <input type="text" class="form-control" id="add-contact-first-name-field" placeholder="Enter first name" name="first-name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="add-contact-last-nam-fielde" class="form-label">Last Name:</label>
+                    <input type="text" class="form-control" id="add-contact-last-name-field" placeholder="Enter last name" name="last-name">
+                  </div>
+                  <div class="mb-3 mt-3">
+                    <label for="add-contact-address-field" class="form-label">Address:</label>
+                    <input type="text" class="form-control" id="add-contact-address-field" placeholder="Enter address" name="address">
+                  </div>
+                  <div class="mb-3 mt-3">
+                    <label for="add-contact-phone-field" class="form-label">Phone:</label>
+                    <input type="text" class="form-control" id="add-contact-phone-field" placeholder="Enter phone number" name="phone">
+                  </div>
+                  
+                </div>
+          
+                <div class="modal-footer">
+                  <button type="button" class="btn btn btn-primary" onclick="addSuubmitHandler()" data-bs-dismiss="modal">Submit</button>
+                </div>
+          
+              </div>
+            </div>
+          </div>
+
+          <!-- edit modal....................................................................................... -->
+
+          <div class="modal" id="edit-modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                
+                <div class="modal-header">
+                  <h4 class="modal-title">Fill The Fields</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="moadl-body p-4">
+
+                  <div class="mb-3 mt-3">
+                    <label for="edit-contact-first-name-field" class="form-label">First Name:</label>
+                    <input type="text" class="form-control" id="edit-contact-first-name-field" name="first-name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="edit-contact-last-name-field" class="form-label">Last Name:</label>
+                    <input type="text" class="form-control" id="edit-contact-last-name-field" name="last-name">
+                  </div>
+                  <div class="mb-3 mt-3">
+                    <label for="edit-contact-address-field" class="form-label">Address:</label>
+                    <input type="text" class="form-control" id="edit-contact-address-field" name="address">
+                  </div>
+                  <div class="mb-3 mt-3">
+                    <label for="edit-contact-phone-field" class="form-label">Phone:</label>
+                    <input type="text" class="form-control" id="edit-contact-phone-field"  name="phone">
+                  </div>
+                  
+                </div>
+          
+                <div class="modal-footer">
+                  <button type="button" id="edit-submit" data-clicked-user-index class="btn btn btn-primary" onclick="editSuubmitHandler()" data-bs-dismiss="modal">Submit</button>
+                </div>
+          
+              </div>
+            </div>
+          </div>
+
+
+
+
+    </main>
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/methods.js"></script>
+    <script src="./js/renderTable.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>
