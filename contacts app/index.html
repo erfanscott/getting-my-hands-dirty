@@ -16,24 +16,63 @@
             </div>
         </nav>
     </header>
+
+
     <main class="pt-4">
 
+        <div class="container mt-3">
 
-        <div class="table-responsive container">
-            <table class="table">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Edit/Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+         
+            <div class="row d-flex align-items-center mb-5">
+
+
+              <h2 class="col-8">Contacts</h2>
+  
+  
+              <div class="form-group col">
+                <select class="form-control" id="sort-by">
+                  <option value="" selected disabled hidden>Sort By</option>
+                  <option value="first-name">First Name</option>
+                  <option value="last-name">Last Name</option>
+                  <option value="address">Address</option>
+                </select>
+              </div>
+
+              <div class="form-group col">
+                <select class="form-control" id="sort-order">
+                  <option value="ascending" selected>Ascending</option>
+                  <option value="descending">Descending</option>
+                </select>
+              </div>
+
+
+              
+  
+              
+              <div class="input-group col">
+                <input id="search-box" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+              </div>
+
+
+            </div>
+          
+           
+          <div class="table-responsive container">
+              <table class="table">
+                  <thead>
+                      <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">First Name</th>
+                      <th scope="col">Last Name</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">Phone</th>
+                      <th scope="col">Edit/Delete</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+          </div>
         </div>
 
         <!-- Delete modal....................................................................................... -->

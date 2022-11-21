@@ -1,3 +1,60 @@
+function sort(sortBy,sortOrder){
+    let toBeSortedUsers = users
+    let _sortBy
+     
+
+    switch (sortBy){
+
+        case "first-name":
+            _sortBy = "firstName"
+        break
+
+        case "last-name":
+            _sortBy = "lastName"
+        break 
+        case "address":
+            _sortBy = "address"
+
+    }
+    
+
+    return  toBeSortedUsers.sort(function(a,b){
+                let x = a[_sortBy].toLowerCase()
+                let y = b[_sortBy].toLowerCase()
+
+                if(x<y) {return sortOrder==="ascending" ? -1 : 1}
+                if(x>y) {return sortOrder==="ascending" ? 1 : -1}
+                return 0
+            })
+    
+
+}
+// return sortOrder==="ascending" ? -1 : 1
+
+
+
+
+
+
+function searchUser(searchedKey){
+    const  searchResults = users.filter(user => {
+        for(let key in user) {
+            if(String(user[key]).search(searchedKey) != -1){
+                return true
+            }
+        }
+        return false
+    })
+    renderTable(searchResults)
+   
+}
+
+
+
+
+
+
+
 
 
 function deleteUser(id){
@@ -24,22 +81,5 @@ function addUser(newFirstName,newLastName,newAddress,newPhone){
     }) 
 
     renderTable(users);
-//     const newContactEl = document.createElement("tr");
-//     newContactEl.innerHTML = `
-//     <th scope="row">${newId}</th>
-//     <td>${firstName}</td>
-//     <td>${lastName}</td>
-//     <td>${address}</td>
-//     <td>${phone}</td>
-//     <td>
-//         <div class="btn-group btn-group-md">
-//             <button  data-edit-btn-id=${newId} type="button" class="btn btn-info edit-btn">Edit</button>
-//             <button  data-delete-btn-id=${newId} type="button" class="btn btn-danger del-btn" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
-//         </div>
-//     </td>
-// `;
-
-    // const tableBodyEl = document.querySelector("tbody");
-    // tableBodyEl.append(newContactEl);
    
 }

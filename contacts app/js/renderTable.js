@@ -29,6 +29,31 @@ editEventsSetup()
 
 }
 
+const sortByEl = document.getElementById("sort-by")
+const sortOrder = document.getElementById("sort-order")
+
+sortByEl.addEventListener("change",event =>{
+    const sortedUsers = sort(event.currentTarget.value,sortOrder.value)
+    renderTable(sortedUsers) 
+})
+
+sortOrder.addEventListener("change",event =>{
+    if(!sortByEl.value){return}
+    const sortedUsers = sort(sortByEl.value,event.currentTarget.value)
+    renderTable(sortedUsers) 
+})
+
+
+
+
+
+
+const searchEl = document.getElementById("search-box")
+
+searchEl.addEventListener("input", event => {
+    searchUser(event.target.value)
+})
+
 function editEventsSetup(){
     const editSubmitBtnEl = document.querySelector("#edit-submit")
     const editBtnEls = document.querySelectorAll(".edit-btn")
