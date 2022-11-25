@@ -14,6 +14,7 @@ function renderTable(users){
             <div class="btn-group btn-group-md">
                 <button  data-edit-btn-id=${user.id} type="button" class="btn btn-info edit-btn" data-bs-toggle="modal" data-bs-target="#edit-modal">Edit</button>
                 <button  data-delete-btn-id=${user.id} type="button" class="btn btn-danger del-btn" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+                <button  data-detail-btn-id=${user.id} type="button" class="btn btn-warning detail-btn" >Detail</button>
             </div>
         </td>
     `;
@@ -22,24 +23,25 @@ function renderTable(users){
 
 
 })
-
+// sortEventSetup()
+// sortEventSetup()
 deleteEventsSetup()
 editEventsSetup()
+detailEventSetup()
 
 
 }
 
-const sortByEl = document.getElementById("sort-by")
-const sortOrder = document.getElementById("sort-order")
+// const sortByEl = document.getElementById("sort-by")
+// const sortOrder = document.getElementById("sort-order")
 
 sortByEl.addEventListener("change",event =>{
-    const sortedUsers = sort(event.currentTarget.value,sortOrder.value)
-    renderTable(sortedUsers) 
+    const sortedUsers = sort(event.currentTarget.value,sortOrder.value,searchUser(searchEl.value,users))
+    renderTable(sortedUsers ) 
 })
 
 sortOrder.addEventListener("change",event =>{
-    if(!sortByEl.value){return}
-    const sortedUsers = sort(sortByEl.value,event.currentTarget.value)
+    const sortedUsers = sort(sortByEl.value,event.currentTarget.value,searchUser(searchEl.value,users))
     renderTable(sortedUsers) 
 })
 
@@ -48,11 +50,18 @@ sortOrder.addEventListener("change",event =>{
 
 
 
-const searchEl = document.getElementById("search-box")
+// const searchEl = document.getElementById("search-box")
 
 searchEl.addEventListener("input", event => {
-    searchUser(event.target.value)
+    
+    const filteredUsers = searchUser(event.target.value,users)
+    renderTable(sort(sortByEl.value,sortOrder.value,filteredUsers))
 })
+
+
+
+
+
 
 function editEventsSetup(){
     const editSubmitBtnEl = document.querySelector("#edit-submit")
@@ -115,7 +124,10 @@ function editSuubmitHandler(){
     users[clickedUsertId].address = document.querySelector("#edit-contact-address-field").value
     users[clickedUsertId].phone = document.querySelector("#edit-contact-phone-field").value
 
-    renderTable(users);
+    saveUsersToTheLocalStorage()
+
+    const filteredUsers = searchUser(searchEl.value,users)
+    renderTable(sort(sortByEl.value,sortOrder.value,filteredUsers))
 
     document.querySelector("#edit-contact-first-name-field").value = ''
     document.querySelector("#edit-contact-last-name-field").value = ''
@@ -128,3 +140,15 @@ function deleteConfirmClickHandler(){
     const deleteConfirmationBtn = document.querySelector("#delete-confirmation")
     deleteUser(parseInt(deleteConfirmationBtn.dataset.clickedUser))
 }
+
+
+function detailEventSetup(){
+    const detailBtns = document.querySelectorAll(".detail-btn")
+    detailBtns.forEach(btn => {
+        btn.addEventListener("click",() => {
+            window.location.assign("./user.html")
+            sessionStorage.setItem("user",btn.dataset.detailBtnId)
+        })
+    })
+}
+

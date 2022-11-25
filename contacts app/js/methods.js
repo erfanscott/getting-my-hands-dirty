@@ -1,5 +1,27 @@
-function sort(sortBy,sortOrder){
-    let toBeSortedUsers = users
+function saveUsersToTheLocalStorage(){
+    const stringifiedUsers = JSON.stringify(users)
+    localStorage.setItem("users",stringifiedUsers)
+}
+
+function loadUsersFromTheLocalStorage(){
+    return localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : []
+}
+
+
+
+
+
+
+
+
+function sort(sortBy,sortOrder,sortInputArray){
+    console.log(sortBy);
+    console.log(sortOrder);
+    console.log(sortInputArray);
+   
+   
+    if(!sortBy){return sortInputArray}
+
     let _sortBy
      
 
@@ -18,7 +40,7 @@ function sort(sortBy,sortOrder){
     }
     
 
-    return  toBeSortedUsers.sort(function(a,b){
+    return  sortInputArray.sort(function(a,b){
                 let x = a[_sortBy].toLowerCase()
                 let y = b[_sortBy].toLowerCase()
 
@@ -36,8 +58,9 @@ function sort(sortBy,sortOrder){
 
 
 
-function searchUser(searchedKey){
-    const  searchResults = users.filter(user => {
+function searchUser(searchedKey,searchedArray){
+    
+    const  searchResults = searchedArray.filter(user => {
         for(let key in user) {
             if(String(user[key]).search(searchedKey) != -1){
                 return true
@@ -45,7 +68,8 @@ function searchUser(searchedKey){
         }
         return false
     })
-    renderTable(searchResults)
+   
+    return searchResults
    
 }
 
@@ -63,11 +87,11 @@ function deleteUser(id){
     for(let i=id-1; i<users.length; i++){
         users[i].id--;
     }
-    console.log(users);
+    saveUsersToTheLocalStorage()
 
 
-   
-    renderTable(users);
+    const filteredUsers = searchUser(searchEl.value,users)
+    renderTable(sort(sortByEl.value,sortOrder.value,filteredUsers))
 }
 
 function addUser(newFirstName,newLastName,newAddress,newPhone){
@@ -80,6 +104,8 @@ function addUser(newFirstName,newLastName,newAddress,newPhone){
         phone:newPhone
     }) 
 
-    renderTable(users);
+    saveUsersToTheLocalStorage()
+    const filteredUsers = searchUser(searchEl.value,users)
+    renderTable(sort(sortByEl.value,sortOrder.value,filteredUsers))
    
 }
